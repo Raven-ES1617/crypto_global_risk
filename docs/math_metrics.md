@@ -71,7 +71,7 @@ $$
 Матрица $\Omega$ — ковариационная матрица приведенных инноваций. Эти инновации не обязаны быть ортогональными: для разных рынков обычно
 
 $$
-\operatorname{Cov}(u_{it}, u_{jt}) \ne 0.
+\mathrm{Cov}(u_{it}, u_{jt}) \ne 0.
 $$
 
 Именно это создает проблему для Hasbrouck information share: вклад рынка зависит от способа ортогонализации коррелированных инноваций.
@@ -246,7 +246,7 @@ $$
 Ее дисперсия:
 
 $$
-\operatorname{Var}
+\mathrm{Var}
 \left[
 e_i'
 \left(
@@ -483,9 +483,9 @@ $$
 Ее дисперсия:
 
 $$
-\operatorname{Var}(\eta_t)
+\mathrm{Var}(\eta_t)
 =
-\operatorname{Var}(\psi u_t)
+\mathrm{Var}(\psi u_t)
 =
 \psi \Omega \psi'.
 $$
@@ -493,7 +493,7 @@ $$
 Если инновации $u_t$ были бы некоррелированными, то
 
 $$
-\Omega = \operatorname{diag}(\sigma_{11},\dots,\sigma_{nn}),
+\Omega = \mathrm{diag}(\sigma_{11},\dots,\sigma_{nn}),
 $$
 
 и вклад рынка $j$ был бы естественно равен
@@ -543,7 +543,7 @@ $$
 Так как $z_{jt}$ ортогональны и имеют единичную дисперсию:
 
 $$
-\operatorname{Var}(\eta_t)
+\mathrm{Var}(\eta_t)
 =
 \sum_{j=1}^{n} q_j^2.
 $$
@@ -594,7 +594,7 @@ $$
 
 $$
 D =
-\operatorname{diag}
+\mathrm{diag}
 \left(
 \sqrt{\sigma_{11}},
 \sqrt{\sigma_{22}},

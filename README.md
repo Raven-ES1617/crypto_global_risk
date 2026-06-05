@@ -285,7 +285,7 @@ VAR($p$) можно переписать как VECM:
 \qquad i=1,\dots,p-1.
 ```
 
-Если $\operatorname{rank}(\Pi)=r$, то:
+Если $\mathrm{rank}(\Pi)=r$, то:
 
 ```math
 \Pi=\alpha\beta',
@@ -620,9 +620,9 @@ GIS измеряет не прогнозную дисперсию, а вклад
 Дисперсия этой инновации:
 
 ```math
-\operatorname{Var}(\eta_t)
+\mathrm{Var}(\eta_t)
 =
-\operatorname{Var}(\psi u_t)
+\mathrm{Var}(\psi u_t)
 =
 \psi\Omega\psi'.
 ```
@@ -630,7 +630,7 @@ GIS измеряет не прогнозную дисперсию, а вклад
 Если бы $\Omega$ была диагональной:
 
 ```math
-\Omega=\operatorname{diag}(\sigma_{11},\dots,\sigma_{nn}),
+\Omega=\mathrm{diag}(\sigma_{11},\dots,\sigma_{nn}),
 ```
 
 то вклад рынка $j$ был бы:
@@ -690,7 +690,7 @@ q=\psi F.
 Так как $z_{jt}$ ортогональны:
 
 ```math
-\operatorname{Var}(\eta_t)
+\mathrm{Var}(\eta_t)
 =
 \sum_{j=1}^{n}q_j^2.
 ```
@@ -727,7 +727,7 @@ q_j^2
 
 ```math
 D=
-\operatorname{diag}
+\mathrm{diag}
 \left(
 \sqrt{\sigma_{11}},
 \sqrt{\sigma_{22}},
