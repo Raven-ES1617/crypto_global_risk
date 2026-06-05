@@ -1,0 +1,77 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE/editor
+.idea/
+.vscode/
+
+# Local data, generated outputs, and private research artifacts
+data/
+artifacts/
+logs/
+
+# Article/manuscript sources and journal templates
+*.tex
+*.bib
+*.bst
+*.cls
+*.sty
+*.doc
+*.docx
+*.odt
+*.rtf
+*.pdf
+article/
+articles/
+drafts/
+manuscript/
+manuscripts/
+paper/
+papers/
+submission/
+submissions/
+template/
+templates/
+*_template/
+
+# LaTeX build products
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+
+# Secrets/local config
+.env
+.env.*
+config/*.env
+
+# OS noise
+.DS_Store
+Thumbs.db

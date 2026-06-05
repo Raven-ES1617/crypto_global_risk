@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crypto-risk-metrics"
+version = "0.1.0"
+description = "GIS, GFEVD, and Hasbrouck proxy metrics for crypto and cross-market risk research."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "beautifulsoup4>=4.12",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "pyarrow>=16.0",
+    "pillow>=10.0",
+    "requests>=2.31",
+    "statsmodels>=0.14",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
