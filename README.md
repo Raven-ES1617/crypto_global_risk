@@ -8,16 +8,18 @@
 
 Проект собран с нуля в текущей папке и не импортирует старый код из `D:\PyCharmProjects\Articles\btc_snp500`.
 
-Полный развернутый математический вывод находится в [docs/math_metrics.md](docs/math_metrics.md). Проверочное соответствие формул, размерностей и кода вынесено в [docs/formula_to_code.md](docs/formula_to_code.md). Ниже в `README.md` также приведена подробная математическая карта проекта, чтобы основные формулы были видны сразу.
+Полный развернутый математический вывод находится в [docs/02_math_metrics.md](docs/02_math_metrics.md). Проверочное соответствие формул, размерностей и кода вынесено в [docs/03_formula_to_code.md](docs/03_formula_to_code.md). Ниже в `README.md` также приведена подробная математическая карта проекта, чтобы основные формулы были видны сразу.
 
 ## Структура
 
 ```text
 crypto and_risk/
   docs/
-    math_metrics.md
-    formula_to_code.md
-    data_sources.md
+    01_data_sources.md
+    02_math_metrics.md
+    03_formula_to_code.md
+    04_block_gfevd.md
+    05_hypotheses_and_artifacts.md
   examples/
     run_metrics.py
   src/
@@ -115,7 +117,7 @@ python -m parsers.download_second_data --groups crypto histdata --mode monthly-z
 python -m parsers.download_second_data --groups histdata --start 2020-01-02T14:30:00Z --end 2020-01-02T14:35:00Z --workers 4
 ```
 
-Подробнее: [docs/data_sources.md](docs/data_sources.md).
+Подробнее: [docs/01_data_sources.md](docs/01_data_sources.md).
 
 ## Расчёт и графики
 
