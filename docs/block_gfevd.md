@@ -6,13 +6,13 @@
 
 Сначала считается обычная GFEVD-матрица по активам:
 
-$$
+```math
 \widetilde{\Theta}^{g}(H)
 =
 \left[
 \widetilde{\theta}^{g}_{ij}(H)
 \right]_{i,j=1}^{N}.
-$$
+```
 
 Здесь:
 
@@ -24,17 +24,17 @@ $$
 
 Матрица нормирована по строкам:
 
-$$
+```math
 \sum_{j=1}^{N}\widetilde{\theta}^{g}_{ij}(H)=1.
-$$
+```
 
 То есть каждая строка показывает, из каких источников складывается неопределенность конкретного актива.
 
 Пример чтения:
 
-$$
+```math
 \widetilde{\theta}^{g}_{BTC,SPX}(H)=0.12
-$$
+```
 
 означает: 12% прогнозной дисперсии BTC на горизонте $H$ объясняется generalized-шоком SPX.
 
@@ -51,21 +51,21 @@ $$
 
 Формально каждому активу $i$ сопоставляется блок:
 
-$$
+```math
 b(i) \in \{\text{crypto},\text{equity\_index},\text{fx\_dollar},\text{commodity}\}.
-$$
+```
 
 Для блока $A$ множество его активов:
 
-$$
+```math
 \mathcal{B}_A = \{i: b(i)=A\}.
-$$
+```
 
 Размер блока:
 
-$$
+```math
 n_A = |\mathcal{B}_A|.
-$$
+```
 
 ## 3. Что означает блоковая ячейка
 
@@ -77,9 +77,9 @@ $$
 
 Например, ячейка:
 
-$$
+```math
 M_{\text{crypto},\text{equity\_index}} = 0.06
-$$
+```
 
 означает: в среднем по криптоактивам 6% прогнозной дисперсии объясняется шоками фондовых индексов.
 
@@ -87,33 +87,33 @@ $$
 
 Берем все asset-level ячейки, где получатель лежит в блоке $A$, а источник шока лежит в блоке $B$:
 
-$$
+```math
 S_{A,B}
 =
 \sum_{i \in \mathcal{B}_A}
 \sum_{j \in \mathcal{B}_B}
 \widetilde{\theta}^{g}_{ij}(H).
-$$
+```
 
 Но есть важное исключение.
 
 Если $A=B$, то есть мы считаем влияние блока на самого себя, собственные диагональные шоки актива на самого себя убираются:
 
-$$
+```math
 \widetilde{\theta}^{g}_{ii}(H) = 0
 \quad
 \text{для всех } i \in \mathcal{B}_A.
-$$
+```
 
 Тогда для диагонального блока фактически считается:
 
-$$
+```math
 S_{A,A}
 =
 \sum_{i \in \mathcal{B}_A}
 \sum_{\substack{j \in \mathcal{B}_A \\ j \ne i}}
 \widetilde{\theta}^{g}_{ij}(H).
-$$
+```
 
 Зачем так делается: диагональ asset-level GFEVD в основном показывает собственную инерцию актива. Для межрыночных перетоков она неинтересна. Нам важнее, насколько активы внутри одного блока объясняют друг друга, а не сами себя.
 
@@ -123,11 +123,11 @@ $$
 
 Первый вариант - `block_total`. Это старый вариант, который показывает совокупный вклад всего блока-источника $B$ в среднюю строку блока-получателя $A$:
 
-$$
+```math
 M^{total}_{A,B}
 =
 \frac{S_{A,B}}{n_A}.
-$$
+```
 
 Он отвечает на вопрос:
 
@@ -146,28 +146,28 @@ $$
 
 Второй вариант - `block_adjusted`. Он дополнительно делит на число directed asset-to-asset пар между блоками:
 
-$$
+```math
 M^{adjusted}_{A,B}
 =
 \frac{S_{A,B}}{q_{A,B}}.
-$$
+```
 
 Для разных блоков:
 
-$$
+```math
 q_{A,B}=n_A n_B,
 \qquad A \ne B.
-$$
+```
 
 Для диагонального блока собственные пары $i \to i$ исключаются:
 
-$$
+```math
 q_{A,A}=n_A(n_A-1).
-$$
+```
 
 Тогда:
 
-$$
+```math
 M^{adjusted}_{A,A}
 =
 \frac{
@@ -176,7 +176,7 @@ M^{adjusted}_{A,A}
 \widetilde{\theta}^{g}_{ij}(H)
 }
 {n_A(n_A-1)}.
-$$
+```
 
 Этот вариант отвечает на вопрос:
 
@@ -208,12 +208,12 @@ $$
 
 Функция `block_matrix()` превращает эту длинную таблицу в матрицу. По умолчанию она берет `average_receiver_share`, то есть `block_total`. Если передать `value_col="average_pair_share"`, получится `block_adjusted`.
 
-$$
+```math
 M =
 \left[
 M_{A,B}
 \right].
-$$
+```
 
 Файлы лежат здесь:
 
@@ -254,49 +254,49 @@ average_receiver_share = 0.21
 
 Для доковидного и постковидного периода считаются две блоковые матрицы для каждого варианта:
 
-$$
+```math
 M^{total,pre}_{A,B},
 \qquad
 M^{total,post}_{A,B},
-$$
+```
 
 и:
 
-$$
+```math
 M^{adjusted,pre}_{A,B},
 \qquad
 M^{adjusted,post}_{A,B}.
-$$
+```
 
 Разница для total-варианта:
 
-$$
+```math
 \Delta M^{total}_{A,B}
 =
 M^{total,post}_{A,B}-M^{total,pre}_{A,B}.
-$$
+```
 
 Разница для adjusted-варианта:
 
-$$
+```math
 \Delta M^{adjusted}_{A,B}
 =
 M^{adjusted,post}_{A,B}-M^{adjusted,pre}_{A,B}.
-$$
+```
 
 Если:
 
-$$
+```math
 \Delta M_{crypto,equity\_index} > 0,
-$$
+```
 
 то после COVID шоки фондового блока стали сильнее объяснять криптоблок.
 
 Если:
 
-$$
+```math
 \Delta M_{crypto,equity\_index} < 0,
-$$
+```
 
 то после COVID эта связь ослабла.
 
@@ -320,34 +320,34 @@ artifacts/figures/gfevd/pre_post/block_matrix_adjusted_diff_covid_minus_pre_*.pn
 3. В каждом окне считается длинная блоковая таблица.
 4. Из нее берутся оба значения:
 
-$$
+```math
 M^{total,(k)}_{A,B},
 \qquad
 M^{adjusted,(k)}_{A,B}.
-$$
+```
 
 5. Для каждой ячейки блока собирается набор значений. Для total-варианта:
 
-$$
+```math
 \{M_{A,B}^{total,(1)}, M_{A,B}^{total,(2)}, \dots, M_{A,B}^{total,(K)}\}.
-$$
+```
 
 И отдельно для adjusted-варианта:
 
-$$
+```math
 \{M_{A,B}^{adjusted,(1)}, M_{A,B}^{adjusted,(2)}, \dots, M_{A,B}^{adjusted,(K)}\}.
-$$
+```
 
 6. По этим значениям считаются квантили:
 
-$$
+```math
 CI_{95\%}
 =
 \left[
 Q_{0.025}(M_{A,B}^{variant,(k)}),
 Q_{0.975}(M_{A,B}^{variant,(k)})
 \right].
-$$
+```
 
 В таблицах это поля:
 
@@ -386,15 +386,15 @@ artifacts/gfevd/confidence/block_adjusted_ci_*_*.csv
 
 Пусть для одной блоковой ячейки и одного варианта нормировки есть:
 
-$$
+```math
 \bar{M}^{pre}_{A,B}, \quad s^{pre}_{A,B}, \quad K_{pre},
-$$
+```
 
 и:
 
-$$
+```math
 \bar{M}^{post}_{A,B}, \quad s^{post}_{A,B}, \quad K_{post}.
-$$
+```
 
 Здесь:
 
@@ -404,17 +404,17 @@ $$
 
 Разница средних:
 
-$$
+```math
 d_{A,B}
 =
 \bar{M}^{post}_{A,B}
 -
 \bar{M}^{pre}_{A,B}.
-$$
+```
 
 Стандартная ошибка разницы:
 
-$$
+```math
 SE(d_{A,B})
 =
 \sqrt{
@@ -422,23 +422,23 @@ SE(d_{A,B})
 +
 \frac{(s^{post}_{A,B})^2}{K_{post}}
 }.
-$$
+```
 
 Тестовая статистика:
 
-$$
+```math
 z_{A,B}
 =
 \frac{d_{A,B}}{SE(d_{A,B})}.
-$$
+```
 
 p-value считается как двухсторонняя нормальная аппроксимация:
 
-$$
+```math
 p_{A,B}
 =
 2\left(1-\Phi(|z_{A,B}|)\right).
-$$
+```
 
 Звездочки:
 
@@ -470,13 +470,13 @@ artifacts/figures/gfevd/dynamics/block_flows_adjusted_*.png
 
 Каждая строка в `block_flow_windows_*.csv` - это одна блоковая ячейка в одном окне:
 
-$$
+```math
 M_{A,B}^{total,(k)}
 \quad
 \text{и}
 \quad
 M_{A,B}^{adjusted,(k)}.
-$$
+```
 
 На графике `block_flows_*.png` для каждого блока-получателя рисуются total-линии:
 
@@ -505,7 +505,7 @@ SPX      -> equity_index
 
 GFEVD:
 
-$$
+```math
 \widetilde{\Theta}^{g}
 =
 \begin{bmatrix}
@@ -513,13 +513,13 @@ $$
 0.20 & 0.60 & 0.20\\
 0.30 & 0.10 & 0.60
 \end{bmatrix}.
-$$
+```
 
 Строки и столбцы идут как `BTC`, `ETH`, `SPX`.
 
 Блок `crypto <- crypto`:
 
-$$
+```math
 S_{crypto,crypto}
 =
 \widetilde{\theta}_{BTC,ETH}
@@ -527,35 +527,35 @@ S_{crypto,crypto}
 \widetilde{\theta}_{ETH,BTC}
 =
 0.10 + 0.20 = 0.30.
-$$
+```
 
 Total-вариант: делим на число крипто-получателей:
 
-$$
+```math
 M^{total}_{crypto,crypto}
 =
 \frac{0.30}{2}
 =
 0.15.
-$$
+```
 
 Adjusted-вариант: делим на число directed пар без собственных пар:
 
-$$
+```math
 q_{crypto,crypto}=2(2-1)=2.
-$$
+```
 
-$$
+```math
 M^{adjusted}_{crypto,crypto}
 =
 \frac{0.30}{2}
 =
 0.15.
-$$
+```
 
 Блок `crypto <- equity_index`:
 
-$$
+```math
 S_{crypto,equity\_index}
 =
 \widetilde{\theta}_{BTC,SPX}
@@ -563,31 +563,31 @@ S_{crypto,equity\_index}
 \widetilde{\theta}_{ETH,SPX}
 =
 0.20 + 0.20 = 0.40.
-$$
+```
 
 Total-вариант:
 
-$$
+```math
 M^{total}_{crypto,equity\_index}
 =
 \frac{0.40}{2}
 =
 0.20.
-$$
+```
 
 Adjusted-вариант:
 
-$$
+```math
 q_{crypto,equity\_index}=2 \cdot 1 = 2.
-$$
+```
 
-$$
+```math
 M^{adjusted}_{crypto,equity\_index}
 =
 \frac{0.40}{2}
 =
 0.20.
-$$
+```
 
 В этом игрушечном примере у `equity_index` только один актив, поэтому total и adjusted совпали. В нашем полном наборе они будут отличаться сильнее: у `crypto` 7 активов, у `fx_dollar` 4, у `equity_index` и `commodity` по 2.
 
